@@ -22,8 +22,15 @@ export class APIBase {
         this.config = extend(true, this.config, config);
     }
 
+    protected log(message: Object) {
+        console.log(`[${ (new Date()).toISOString() }] ${message}`);
+    }
+
     public request(method: string, path: string, query?: Object, data?: any): Promise<Object> {
         let reqPath = this.config.apibase + "/" + path;
+
+        this.log(`${method} ${reqPath}`);
+
         let postData = (data) ? JSON.stringify(data) : null;
         // TODO handle webroot & direct access to binary nodes 
         let headers = {
