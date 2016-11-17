@@ -16,14 +16,14 @@ let Mesh = new MeshAPI();
 let demo = Mesh.api.project("demo");
 const UUID = "8257e65b614a4a5d97e65b614aaa5d1d";
 
-demo.nodes.nodeUuid(UUID).get().then(node => {
+async function test (): Promise<any> {
+    let nodes = await demo.nodes.get();
+    let node = nodes.data[1];
     console.log(node.fields.name);
     node.fields.name += " C";
-    demo.nodes.nodeUuid(UUID).post(node)
-    .then(node => {
-        console.log(node.fields.name);
-    })
-    .catch(reason => {
-        console.error(reason);
-    });
+    let updatedNode = await demo.nodes.nodeUuid(UUID).post(node);
+    console.log(updatedNode.fields.name);
+}
+test().then().catch(reason => {
+    console.log(reason);
 });
