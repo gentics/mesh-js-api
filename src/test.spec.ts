@@ -14,14 +14,13 @@ let Mesh = new MeshAPI();
 // Mesh.api.groups.groupUuid("").delete();
 
 let demo = Mesh.api.project("demo");
-const UUID = "8257e65b614a4a5d97e65b614aaa5d1d";
 
 async function test (): Promise<any> {
-    let nodes = await demo.nodes.get();
+    let nodes = await demo.nodes.get({ version: "draft" });
     let node = nodes.data[1];
     console.log(node.fields.name);
     node.fields.name += " C";
-    let updatedNode = await demo.nodes.nodeUuid(UUID).post(node);
+    let updatedNode = await demo.nodes.nodeUuid(node.uuid).post(node, { version: "draft" });
     console.log(updatedNode.fields.name);
 }
 test().then().catch(reason => {
