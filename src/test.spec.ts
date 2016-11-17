@@ -14,12 +14,16 @@ let Mesh = new MeshAPI();
 // Mesh.api.groups.groupUuid("").delete();
 
 let demo = Mesh.api.project("demo");
-demo.nodes.get().then(nodes => {
-    nodes.data.map(n => {
-        console.log(n.uuid, n.fields.name);
-        n.fields.name += " CHANGED";
-        demo.nodes.nodeUuid(n.uuid).put("", n).then(r => {
-            console.log(r);
-        }).catch(r => console.log(r));
+const UUID = "8257e65b614a4a5d97e65b614aaa5d1d";
+
+demo.nodes.nodeUuid(UUID).get().then(node => {
+    console.log(node.fields.name);
+    node.fields.name += " C";
+    demo.nodes.nodeUuid(UUID).post(node)
+    .then(node => {
+        console.log(node.fields.name);
+    })
+    .catch(reason => {
+        console.error(reason);
     });
 });

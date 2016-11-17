@@ -26,7 +26,19 @@ export class APIBase {
         console.log(`[${ (new Date()).toISOString() }] ${message}`);
     }
 
-    public request(method: string, path: string, query?: any, data?: any): Promise<Object> {
+    public get(path: string, query?: string): Promise<Object> {
+        return this.request("GET", path, query);
+    }
+
+    public post(path: string, data?: any, query?: string): Promise<Object> {
+        return this.request("POST", path, data, query);
+    }
+
+    public delete(path: string): Promise<Object> {
+        return this.request("DELETE", path);
+    }
+
+    private request(method: string, path: string, data?: any, query?: any): Promise<Object> {
         let reqPath = this.config.apibase + path;
 
         this.log(`${method} ${reqPath}`);
@@ -38,7 +50,7 @@ export class APIBase {
         let headers = {
             "Accept": "application/json"
         };
-        if (method === "post" || method === "put") {
+        if (method.toLowerCase() === "post" || method.toLowerCase() === "put") {
             headers["Content-Type"] = "application/json;charset=UTF-8";
             headers["Content-Length"] = postData.length;
         }
@@ -58,7 +70,6 @@ export class APIBase {
                     response += chunk;
                 });
                 res.on("end", () => {
-                    console.log("end");
                     if (res.statusCode >= 200 && res.statusCode < 300) {
                         resolve(JSON.parse(response));
                     } else {
