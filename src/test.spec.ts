@@ -2,12 +2,24 @@ import{MeshAPI} from "./build/MeshAPI";
 
 let Mesh = new MeshAPI();
 
-// Mesh.api.auth.me.get().then((me) => {
-//     console.log(me);
-// });
+// Mesh.api.groups.groupUuid("").users.get();
+// Mesh.api.groups.groupUuid("").users.userUuid("").put();
+// Mesh.api.groups.groupUuid("").roles.get();
+// Mesh.api.groups.groupUuid("").roles.roleUuid("").put();
+// Mesh.api.groups.groupUuid("").roles.roleUuid("").delete();
+// Mesh.api.groups.post();
+// Mesh.api.groups.get();
+// Mesh.api.groups.groupUuid("").get();
+// Mesh.api.groups.groupUuid("").put();
+// Mesh.api.groups.groupUuid("").delete();
 
-Mesh.api.projectName("demo").nodes.get().then((nodes) => {
-    console.log(nodes);
-}).catch((reason) => {
-    console.log(reason);
+let demo = Mesh.api.project("demo");
+demo.nodes.get().then(nodes => {
+    nodes.data.map(n => {
+        console.log(n.uuid, n.fields.name);
+        n.fields.name += " CHANGED";
+        demo.nodes.nodeUuid(n.uuid).put("", n).then(r => {
+            console.log(r);
+        }).catch(r => console.log(r));
+    });
 });

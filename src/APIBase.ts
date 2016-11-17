@@ -26,13 +26,15 @@ export class APIBase {
         console.log(`[${ (new Date()).toISOString() }] ${message}`);
     }
 
-    public request(method: string, path: string, query?: Object, data?: any): Promise<Object> {
-        let reqPath = this.config.apibase + "/" + path;
+    public request(method: string, path: string, query?: any, data?: any): Promise<Object> {
+        let reqPath = this.config.apibase + path;
 
         this.log(`${method} ${reqPath}`);
 
         let postData = (data) ? JSON.stringify(data) : null;
-        // TODO handle webroot & direct access to binary nodes 
+        // TODO handle webroot & direct access to binary nodes
+        // TODO handle linkresolver endpoint
+        // TODO eventbus bridge  
         let headers = {
             "Accept": "application/json"
         };
@@ -41,7 +43,7 @@ export class APIBase {
             headers["Content-Length"] = postData.length;
         }
         let reqOptions: http.RequestOptions = {
-            method: method,
+            method: method.toUpperCase(),
             host: this.config.host,
             port: this.config.port,
             path: reqPath,
@@ -56,6 +58,7 @@ export class APIBase {
                     response += chunk;
                 });
                 res.on("end", () => {
+                    console.log("end");
                     if (res.statusCode >= 200 && res.statusCode < 300) {
                         resolve(JSON.parse(response));
                     } else {
