@@ -6,11 +6,12 @@ async function test (): Promise<any> {
     let demo = Mesh.api.project("demo");
     await Mesh.api.auth.login.post({ username: "admin", password: "admin" });
     let nodes = await demo.nodes.get({ version: "draft" });
-    nodes.data.map(node => {
-        node.fields.name += " C";
-        demo.nodes.nodeUuid(node.uuid).post(node, { version: "draft" }).then();
-    });
+    for (let node of nodes.data) {
+        // node.fields.name += " C";
+        // demo.nodes.nodeUuid(node.uuid).post(node, { version: "draft" });
+        demo.nodes.nodeUuid(node.uuid).get();
+    }
 }
-test().then().catch(reason => {
+test().catch(reason => {
     console.log(reason);
 });

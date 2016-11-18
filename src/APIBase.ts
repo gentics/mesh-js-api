@@ -20,8 +20,6 @@ export class APIBase {
     // authentication cookie
     cookie: string;
 
-    requestCounter: number = 0;
-
     constructor(config?: MeshConfig) {
         this.config = extend(true, this.config, config);
     }
@@ -73,19 +71,18 @@ export class APIBase {
             headers["Content-Length"] = postData.length;
         }
         let reqOptions: http.RequestOptions = {
+            agent: false,
             method: method,
             host: this.config.host,
             port: this.config.port,
             path: reqPath,
             headers: headers
         };
-        this.requestCounter++;
-        this.log(`${method} #${this.requestCounter} http://${this.config.host}:${this.config.port}${reqPath}`);
+        let timer: number;
         return new Promise<Object>((resolve, reject) => {
-            let reqStartTime = new Date().getTime();
             let req = http.request(reqOptions, (res) => {
-                this.debug((new Date().getTime()) - reqStartTime + "ms");
                 let response = "";
+                this.log(`${method} http://${this.config.host}:${this.config.port}${reqPath} ${Date.now() - timer}ms`);
                 res.on("data", (chunk) => {
                     response += chunk;
                 });
@@ -105,6 +102,7 @@ ${response}
                 });
                 res.on("error", reject);
             });
+
             if (method === "POST" || method === "POST") {
                 req.write(postData, () => {
                     req.end();
@@ -112,6 +110,7 @@ ${response}
             } else {
                 req.end();
             }
+            timer = Date.now();
         });
     }
 }
