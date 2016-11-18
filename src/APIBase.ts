@@ -46,6 +46,15 @@ export class APIBase {
         return this.request("DELETE", path);
     }
 
+    private updateSessionCookie(headers: string[]) {
+        if (!headers) return;
+        headers.forEach(cookie => {
+            if (cookie.indexOf("mesh.token") === 0) {
+                this.cookie = cookie;
+            }
+        });
+    }
+
     private request(method: string, path: string, data?: any, query?: any): Promise<Object> {
         method = method.toUpperCase();
         let reqPath = this.config.apibase + path;
@@ -81,9 +90,7 @@ export class APIBase {
                     response += chunk;
                 });
                 res.on("end", () => {
-                    if (res.headers["set-cookie"]) {
-                        this.cookie = res.headers["set-cookie"][0];
-                    }
+                    this.updateSessionCookie(res.headers["set-cookie"]);
                     if (res.statusCode >= 200 && res.statusCode < 300) {
                         resolve(JSON.parse(response));
                     } else {
