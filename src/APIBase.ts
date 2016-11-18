@@ -3,8 +3,6 @@ import * as http from "http";
 import * as querystring from "querystring";
 
 export interface MeshConfig {
-    username?: string;
-    password?: string;
     host?: string;
     port?: number;
     apibase?: string;
@@ -13,18 +11,16 @@ export interface MeshConfig {
 
 export class APIBase {
     config: MeshConfig = {
-        username: "admin",
-        password: "admin",
         host: "localhost",
         port: 8080,
         apibase: "/api/v1",
-        debug: false
+        debug: true
     };
 
     // authentication cookie
     cookie: string;
 
-    requestCounter: number = -1;
+    requestCounter: number = 0;
 
     constructor(config?: MeshConfig) {
         this.config = extend(true, this.config, config);
@@ -50,15 +46,8 @@ export class APIBase {
         return this.request("DELETE", path);
     }
 
-    public login(): Promise<Object> {
-        return this.request("GET", "/auth/login");
-    }
-
-    private async request(method: string, path: string, data?: any, query?: any): Promise<Object> {
+    private request(method: string, path: string, data?: any, query?: any): Promise<Object> {
         method = method.toUpperCase();
-        if (!this.cookie && path !== "/auth/login") {
-            await this.login();
-        }
         let reqPath = this.config.apibase + path;
         if (query) {
             reqPath += "?" + querystring.stringify(query);
@@ -81,20 +70,17 @@ export class APIBase {
             path: reqPath,
             headers: headers
         };
-        if (!this.cookie) reqOptions.auth = `${this.config.username}:${this.config.password}`;       
-        this.requestCounter++; 
+        this.requestCounter++;
         this.log(`${method} #${this.requestCounter} http://${this.config.host}:${this.config.port}${reqPath}`);
-        this.debug(JSON.stringify(headers));
-
         return new Promise<Object>((resolve, reject) => {
             let reqStartTime = new Date().getTime();
             let req = http.request(reqOptions, (res) => {
+                this.debug((new Date().getTime()) - reqStartTime + "ms");
                 let response = "";
                 res.on("data", (chunk) => {
                     response += chunk;
                 });
                 res.on("end", () => {
-                    this.debug(`Request #${this.requestCounter} completed in ${(new Date().getTime() - reqStartTime)} ms`);
                     if (res.headers["set-cookie"]) {
                         this.cookie = res.headers["set-cookie"][0];
                     }
