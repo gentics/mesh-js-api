@@ -71,7 +71,6 @@ export class APIBase {
             headers["Content-Length"] = postData.length;
         }
         let reqOptions: http.RequestOptions = {
-            agent: false,
             method: method,
             host: this.config.host,
             port: this.config.port,
