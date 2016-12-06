@@ -68,7 +68,7 @@ export class APIBase {
         if (this.cookie) headers["Cookie"] = this.cookie;
         if (method === "POST" || method === "PUT") {
             headers["Content-Type"] = "application/json;charset=UTF-8";
-            headers["Content-Length"] = postData.length;
+            headers["Content-Length"] = postData.length || 0;
         }
         let reqOptions: http.RequestOptions = {
             method: method,
