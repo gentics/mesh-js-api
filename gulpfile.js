@@ -13,7 +13,7 @@ gulp.task('build', () => {
         .pipe(ts(tsProject));
     tsResult.dts.pipe(gulp.dest('./lib'));
     var res = tsResult.js.pipe(sourcemaps.write('.', { sourceRoot: '../src' })).pipe(gulp.dest('./lib')).on('end', () => {
-        require('./lib/test.spec');
+        // require('./lib/test.spec');
     });
     return res;
 });

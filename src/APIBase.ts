@@ -32,16 +32,16 @@ export class APIBase {
         console.log(`[${ (new Date()).toISOString() }] ${message}`);
     }
 
-    public get(path: string, query?: any): Promise<Object> {
-        return this.request("GET", path, "", query);
+    public get(path: string, query?: any, token?: string): Promise<Object> {
+        return this.request("GET", path, "", query, token);
     }
 
-    public post(path: string, data?: any, query?: any): Promise<Object> {
-        return this.request("POST", path, data, query);
+    public post(path: string, data?: any, query?: any, token?: string): Promise<Object> {
+        return this.request("POST", path, data, query, token);
     }
 
-    public delete(path: string): Promise<Object> {
-        return this.request("DELETE", path);
+    public delete(path: string, token?: string): Promise<Object> {
+        return this.request("DELETE", path, token);
     }
 
     private updateSessionCookie(headers: string[]) {
@@ -53,7 +53,7 @@ export class APIBase {
         });
     }
 
-    private request(method: string, path: string, data?: any, query?: any): Promise<Object> {
+    private request(method: string, path: string, data?: any, query?: any, token?: string): Promise<Object> {
         method = method.toUpperCase();
         let reqPath = this.config.apibase + path;
         if (query) {
@@ -65,7 +65,13 @@ export class APIBase {
         // TODO eventbus bridge  
         let headers = {};
         headers["Accept"] = "application/json";
-        if (this.cookie) headers["Cookie"] = this.cookie;
+        if (this.cookie) {
+            headers["Cookie"] = this.cookie;
+        }
+        if (token) {
+            // overwrite token cookie if a token string was set to use a specific user connection
+            headers["Cookie"] = `mesh.token=${token}`;
+        }
         if (method === "POST" || method === "PUT") {
             headers["Content-Type"] = "application/json;charset=UTF-8";
             headers["Content-Length"] = postData.length || 0;
@@ -86,7 +92,10 @@ export class APIBase {
                     response += chunk;
                 });
                 res.on("end", () => {
-                    this.updateSessionCookie(res.headers["set-cookie"]);
+                    if (!token) {
+                        // only update the session cookie if there was no token used
+                        this.updateSessionCookie(res.headers["set-cookie"]);
+                    }
                     if (res.statusCode >= 200 && res.statusCode < 300) {
                         resolve(JSON.parse(response));
                     } else {
