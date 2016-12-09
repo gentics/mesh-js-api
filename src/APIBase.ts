@@ -17,8 +17,8 @@ export class APIBase {
         debug: true
     };
 
-    // authentication cookie
-    cookie: string;
+    // mesh authentication token
+    token: string;
 
     constructor(config?: MeshConfig) {
         this.config = extend(true, this.config, config);
@@ -44,11 +44,11 @@ export class APIBase {
         return this.request("DELETE", path, token);
     }
 
-    private updateSessionCookie(headers: string[]) {
+    private updateSessionToken(headers: string[]) {
         if (!headers) return;
         headers.forEach(cookie => {
             if (cookie.indexOf("mesh.token") === 0) {
-                this.cookie = cookie;
+                this.token = cookie.split('"')[1]
             }
         });
     }
@@ -65,11 +65,8 @@ export class APIBase {
         // TODO eventbus bridge  
         let headers = {};
         headers["Accept"] = "application/json";
-        if (this.cookie) {
-            headers["Cookie"] = this.cookie;
-        }
-        if (token) {
-            // overwrite token cookie if a token string was set to use a specific user connection
+        if (token || this.token) {
+            token = token || this.token;
             headers["Cookie"] = `mesh.token=${token}`;
         }
         if (method === "POST" || method === "PUT") {
@@ -92,10 +89,7 @@ export class APIBase {
                     response += chunk;
                 });
                 res.on("end", () => {
-                    if (!token) {
-                        // only update the session cookie if there was no token used
-                        this.updateSessionCookie(res.headers["set-cookie"]);
-                    }
+                    this.updateSessionToken(res.headers["set-cookie"]);
                     if (res.statusCode >= 200 && res.statusCode < 300) {
                         resolve(JSON.parse(response));
                     } else {
