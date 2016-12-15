@@ -48,7 +48,7 @@ export class APIBase {
         if (!headers) return;
         headers.forEach(cookie => {
             if (cookie.indexOf("mesh.token") === 0) {
-                this.token = cookie.split('"')[1]
+                this.token = cookie.replace("mesh.token=", "");
             }
         });
     }
@@ -93,13 +93,7 @@ export class APIBase {
                     if (res.statusCode >= 200 && res.statusCode < 300) {
                         resolve(JSON.parse(response));
                     } else {
-                        let err = `Request failed.
-Path: ${reqPath}
-Status: ${res.statusCode} ${res.statusMessage}
-Body:
-${response}
-`;
-                        reject(new Error(err));
+                        reject(res);
                     }
                 });
                 res.on("error", reject);
