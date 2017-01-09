@@ -2,4 +2,3 @@ node_modules
 lib
 .vscode
 src/build
-typings
