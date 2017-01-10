@@ -1,6 +1,6 @@
 {
   "name": "mesh-api-client",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "lib/build/MeshAPI.js",
   "scripts": {
@@ -9,11 +9,21 @@
   "author": "Clemens Prerovsky <c.prerovsky@gentics.com>",
   "license": "",
   "devDependencies": {
+    "@types/extend": "^2.0.30",
+    "@types/node": "^6.0.58",
+    "@types/request": "^0.0.39",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-typescript": "^2.13.6"
+    "gulp-typescript": "^3.1.4",
+    "typescript": "~2.0.3"
   },
-  "files": ["lib/"],
-  "typings": "lib/index.d.ts"
+  "files": [
+    "lib/"
+  ],
+  "typings": "lib/build/MeshAPI.d.ts",
+  "dependencies": {
+    "extend": "^3.0.0",
+    "request": "^2.79.0"
+  }
 }
