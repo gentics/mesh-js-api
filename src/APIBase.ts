@@ -1,18 +1,17 @@
 import * as extend from "extend";
 import * as http from "http";
 import * as querystring from "querystring";
+import * as request from "request";
 
 export interface MeshConfig {
-    host?: string;
-    port?: number;
+    url?: string;
     apibase?: string;
     debug?: boolean;
 }
 
 export class APIBase {
     config: MeshConfig = {
-        host: "localhost",
-        port: 8080,
+        url: "http://localhost:8080",
         apibase: "/api/v1",
         debug: true
     };
@@ -41,7 +40,7 @@ export class APIBase {
     }
 
     public delete(path: string, token?: string): Promise<Object> {
-        return this.request("DELETE", path, token);
+        return this.request("DELETE", path, undefined, undefined, token);
     }
 
     private updateSessionToken(headers: string[]) {
@@ -53,59 +52,39 @@ export class APIBase {
         });
     }
 
-    private request(method: string, path: string, data?: any, query?: any, token?: string): Promise<Object> {
-        method = method.toUpperCase();
+    private request(method: string, path: string, data?: any, query?: any, token?: string): Promise<any> {
         let reqPath = this.config.apibase + path;
-        if (query) {
-            reqPath += "?" + querystring.stringify(query);
-        }
-        let postData = (data) ? JSON.stringify(data) : null;
         // TODO handle webroot & direct access to binary nodes
         // TODO handle linkresolver endpoint
         // TODO eventbus bridge  
         let headers = {};
-        headers["Accept"] = "application/json";
         if (token || this.token) {
             token = token || this.token;
             headers["Cookie"] = `mesh.token=${token}`;
         }
-        if (method === "POST" || method === "PUT") {
-            headers["Content-Type"] = "application/json;charset=UTF-8";
-            headers["Content-Length"] = postData.length || 0;
-        }
-        let reqOptions: http.RequestOptions = {
+        let reqOptions : request.OptionsWithUrl = {
+            url: this.config.url + reqPath,
             method: method,
-            host: this.config.host,
-            port: this.config.port,
-            path: reqPath,
-            headers: headers
+            headers: headers,
+            qs: query,
+            body: data,
+            json: true
         };
         let timer: number;
-        return new Promise<Object>((resolve, reject) => {
-            let req = http.request(reqOptions, (res) => {
-                let response = "";
-                this.log(`${method} http://${this.config.host}:${this.config.port}${reqPath} ${Date.now() - timer}ms`);
-                res.on("data", (chunk) => {
-                    response += chunk;
-                });
-                res.on("end", () => {
-                    this.updateSessionToken(res.headers["set-cookie"]);
-                    if (res.statusCode >= 200 && res.statusCode < 300) {
-                        resolve(JSON.parse(response));
+        return new Promise<any>((resolve, reject) => {
+            request(reqOptions, (error, response, body) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    this.log(`${method} ${this.config.url}${reqPath} ${Date.now() - timer}ms`);
+                    if (response.statusCode >= 200 && response.statusCode < 300) {
+                        this.updateSessionToken(response.headers["set-cookie"]);
+                        resolve(body);
                     } else {
-                        reject(res);
+                        reject(body);
                     }
-                });
-                res.on("error", reject);
-            });
-
-            if (method === "POST" || method === "POST") {
-                req.write(postData, () => {
-                    req.end();
-                });
-            } else {
-                req.end();
-            }
+                }
+            })
             timer = Date.now();
         });
     }
