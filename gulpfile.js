@@ -8,7 +8,7 @@ var tsProject = ts.createProject('tsconfig.json', {
 });
 
 gulp.task('build', () => {
-    var tsResult = gulp.src(['./src/**/*.ts', './typings/*.ts'])
+    var tsResult = gulp.src(['./src/**/*.ts', './typings/*.ts', './node_modules/@types/**/*.ts'])
         .pipe(sourcemaps.init())
         .pipe(ts(tsProject));
     tsResult.dts.pipe(gulp.dest('./lib'));
