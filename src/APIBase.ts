@@ -68,7 +68,8 @@ export class APIBase {
             headers: headers,
             qs: query,
             body: data,
-            json: true
+            json: true,
+            encoding: null // enables us to deliver binaries
         };
         let timer: number;
         return new Promise<any>((resolve, reject) => {
