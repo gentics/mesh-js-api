@@ -77,7 +77,7 @@ export class APIBase {
                 if (error) {
                     reject(error);
                 } else {
-                    this.log(`${method} ${this.config.url}${reqPath} ${Date.now() - timer}ms`);
+                    this.debug(`${method} ${this.config.url}${reqPath} ${Date.now() - timer}ms`);
                     if (response.statusCode >= 200 && response.statusCode < 300) {
                         this.updateSessionToken(response.headers["set-cookie"]);
                         resolve(body);
