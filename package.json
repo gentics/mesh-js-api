@@ -18,6 +18,9 @@
     "gulp-typescript": "^3.1.4",
     "typescript": "~2.0.3"
   },
+  "repository": {
+    "url": "git@github.com:gentics/mesh-js-api.git"
+  },
   "files": [
     "lib/"
   ],
