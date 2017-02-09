@@ -1,7 +1,7 @@
 {
-  "name": "mesh-api-client",
-  "version": "0.1.0",
-  "description": "",
+  "name": "mesh-api",
+  "version": "0.0.0",
+  "description": "An API client for Gentics Mesh, written in TypeScript",
   "main": "lib/build/MeshAPI.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
