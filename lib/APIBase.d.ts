@@ -1,6 +1,5 @@
 export interface MeshConfig {
     url?: string;
-    apibase?: string;
     debug?: boolean;
 }
 export declare class APIBase {

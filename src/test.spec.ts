@@ -8,7 +8,8 @@ async function test(): Promise<any> {
     let demo = Mesh.api.project("demo");
     let nodes = await demo.nodes.get({ page: 1, perPage: 300, version: "draft" });
     for (let node of nodes.data) {
-        demo.nodes.nodeUuid(node.uuid).get({ version: "draft"});
+        let data = await demo.nodes.nodeUuid(node.uuid).get({ version: "draft"});
+        console.log(data);
     }
     // for (let j = 0; j < 10000; j++) {
     //     await demo.nodes.post({

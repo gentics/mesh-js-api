@@ -5,15 +5,13 @@ import * as request from "request";
 
 export interface MeshConfig {
     url?: string;
-    apibase?: string;
     debug?: boolean;
 }
 
 export class APIBase {
     config: MeshConfig = {
-        url: "http://localhost:8080",
-        apibase: "/api/v1",
-        debug: true
+        url: "http://localhost:8080/api/v1",
+        debug: false
     };
 
     // mesh authentication token
@@ -53,7 +51,6 @@ export class APIBase {
     }
 
     private request(method: string, path: string, data?: any, query?: any, token?: string): Promise<any> {
-        let reqPath = this.config.apibase + path;
         // TODO handle webroot & direct access to binary nodes
         // TODO handle linkresolver endpoint
         // TODO eventbus bridge  
@@ -63,7 +60,7 @@ export class APIBase {
             headers["Cookie"] = `mesh.token=${token}`;
         }
         let reqOptions : request.OptionsWithUrl = {
-            url: this.config.url + reqPath,
+            url: this.config.url + path,
             method: method,
             headers: headers,
             qs: query,
@@ -77,7 +74,7 @@ export class APIBase {
                 if (error) {
                     reject(error);
                 } else {
-                    this.debug(`${method} ${this.config.url}${reqPath} ${Date.now() - timer}ms`);
+                    this.debug(`${method} ${this.config.url}${path} ${Date.now() - timer}ms`);
                     if (response.statusCode >= 200 && response.statusCode < 300) {
                         this.updateSessionToken(response.headers["set-cookie"]);
                         resolve(body);
