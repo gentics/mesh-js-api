@@ -1,4 +1,4 @@
-import {HTTPResource, HTTPMethod, HTTP_RESOURCE_TYPE} from "./HTTPResources";
+import {HTTPResource, HTTPMethod, HTTP_RESOURCE_TYPE} from "./httpresources";
 
 namespace ResponseTypeStore {
     let store: { [responseType: string]: any } = {};
