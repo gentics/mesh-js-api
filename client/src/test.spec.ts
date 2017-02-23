@@ -3,6 +3,7 @@ import { MeshAPI } from "./generated/MeshAPI";
 let Mesh = new MeshAPI();
 
 async function test(): Promise<any> {
+    console.log('Mesh API version: ' + Mesh.version);
     await Mesh.api.auth.login.post({ username: "admin", password: "admin" });
     let demo = Mesh.api.project("demo");
     let nodes = await demo.nodes.get({ page: 1, perPage: 300, version: "draft" });

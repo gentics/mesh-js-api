@@ -12,9 +12,10 @@ namespace ResponseTypeStore {
 }
 
 namespace Templates {
-    export function main (resources: HTTPResource[]) {
+    export function main (resources: HTTPResource[], version: string) {
         return `import {APIBase} from "../APIBase";
     export class MeshAPI extends APIBase {
+        version = '${ version }';
         api = { ${ resources.map(resource).join(",\n") } }
     }
 `;
@@ -100,7 +101,7 @@ namespace Templates {
 /**
  * render http resources into client
  */
-export function render (resources: HTTPResource[]): string {
-    return Templates.main(resources)
+export function render (resources: HTTPResource[], version: string): string {
+    return Templates.main(resources, version)
         + ResponseTypeStore.render();
 }

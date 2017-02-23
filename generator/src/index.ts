@@ -10,4 +10,4 @@ const OUT = '../client/src/generated/MeshAPI.ts';
 let ramlSpec = raml1Parser.loadApiSync(path.resolve(__dirname, RAML_SRC)).toJSON();
 ramlSpec.relativeUri = '';
 let resources = new HTTPResource(ramlSpec, '');
-fs.writeFileSync(path.resolve(__dirname, OUT), render(resources.resources));
+fs.writeFileSync(path.resolve(__dirname, OUT), render(resources.resources, ramlSpec.version));

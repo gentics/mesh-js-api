@@ -1,5 +1,6 @@
 import { APIBase } from "../APIBase";
 export declare class MeshAPI extends APIBase {
+    version: string;
     api: {
         users: {
             post: (data?: any, query?: any, token?: string) => Promise<UsersPostResponse>;

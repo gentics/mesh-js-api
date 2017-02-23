@@ -1,5 +1,6 @@
 import {APIBase} from "../APIBase";
     export class MeshAPI extends APIBase {
+        version = '0.7';
         api = { /**
     * Resource /users
     * Provides endpoints which allow the manipulation of users.
