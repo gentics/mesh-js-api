@@ -4,19 +4,21 @@
   "description": "An API client for Gentics Mesh, written in TypeScript",
   "main": "lib/build/MeshAPI.js",
   "scripts": {
-    "test": "node ./lib/test.spec.js"
+    "clean": "rm -rf ./tmp ./lib",
+    "test": "node ./lib/test.spec.js",
+    "build-generator": "./node_modules/.bin/tsc -p ./generator/tsconfig.json",
+    "generate-client": "node ./tmp/index.js",
+    "build-client": "./node_modules/.bin/tsc -p ./client/tsconfig.json",
+    "build": "npm run build-generator && npm run generate-client && npm run build-client"
   },
   "author": "Clemens Prerovsky <c.prerovsky@gentics.com>",
   "license": "",
   "devDependencies": {
     "@types/extend": "^2.0.30",
-    "@types/node": "^6.0.58",
-    "@types/request": "^0.0.39",
-    "del": "^2.2.2",
-    "gulp": "^3.9.1",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-typescript": "^3.1.4",
-    "typescript": "~2.0.3"
+    "@types/node": "^7.0.5",
+    "@types/request": "^0.0.40",
+    "raml-1-parser": "^1.1.14",
+    "typescript": "~2.2.1"
   },
   "repository": {
     "url": "git@github.com:gentics/mesh-js-api.git"

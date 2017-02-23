@@ -4,12 +4,11 @@
         "declaration": true,
         "sourceMap": true,
         "target": "es6",
-        "outDir": "lib"
+        "outDir": "../tmp/"
     },
     "exclude": [
         "node_modules",
         "typings/browser",
-        "typings/browser.d.ts",
-        "lib"
+        "typings/browser.d.ts"
     ]
 }

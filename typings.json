@@ -1,6 +1,0 @@
-{
-  "globalDependencies": {
-    "extend": "registry:dt/extend#2.0.0+20160316155526",
-    "node": "registry:dt/node#6.0.0+20160815222444"
-  }
-}
