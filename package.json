@@ -1,6 +1,6 @@
 {
   "name": "mesh-api",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "An API client for Gentics Mesh, written in TypeScript",
   "main": "lib/build/MeshAPI.js",
   "scripts": {

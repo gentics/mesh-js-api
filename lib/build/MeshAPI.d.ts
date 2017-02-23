@@ -5,13 +5,16 @@ export declare class MeshAPI extends APIBase {
             post: (data?: any, query?: any, token?: string) => Promise<UsersPostResponse>;
             get: (query?: any, token?: string) => Promise<UsersGetResponse>;
             userUuid: (userUuid: string) => {
-                get: (query?: any, token?: string) => Promise<UsersUserUuidGetResponse>;
                 post: (data?: any, query?: any, token?: string) => Promise<UsersUserUuidPostResponse>;
+                get: (query?: any, token?: string) => Promise<UsersUserUuidGetResponse>;
                 delete: (token?: string) => Promise<UsersUserUuidDeleteResponse>;
                 permissions: {
                     path: (path: string) => {
                         get: (query?: any, token?: string) => Promise<UsersUserUuidPermissionsPathGetResponse>;
                     };
+                };
+                token: {
+                    get: (query?: any, token?: string) => Promise<UsersUserUuidTokenGetResponse>;
                 };
             };
         };
@@ -37,17 +40,17 @@ export declare class MeshAPI extends APIBase {
                 get: (query?: any, token?: string) => Promise<GroupsGroupUuidGetResponse>;
                 post: (data?: any, query?: any, token?: string) => Promise<GroupsGroupUuidPostResponse>;
                 delete: (token?: string) => Promise<GroupsGroupUuidDeleteResponse>;
-                users: {
-                    get: (query?: any, token?: string) => Promise<GroupsGroupUuidUsersGetResponse>;
-                    userUuid: (userUuid: string) => {
-                        post: (data?: any, query?: any, token?: string) => Promise<GroupsGroupUuidUsersUserUuidPostResponse>;
-                    };
-                };
                 roles: {
                     get: (query?: any, token?: string) => Promise<GroupsGroupUuidRolesGetResponse>;
                     roleUuid: (roleUuid: string) => {
                         post: (data?: any, query?: any, token?: string) => Promise<GroupsGroupUuidRolesRoleUuidPostResponse>;
                         delete: (token?: string) => Promise<GroupsGroupUuidRolesRoleUuidDeleteResponse>;
+                    };
+                };
+                users: {
+                    get: (query?: any, token?: string) => Promise<GroupsGroupUuidUsersGetResponse>;
+                    userUuid: (userUuid: string) => {
+                        post: (data?: any, query?: any, token?: string) => Promise<GroupsGroupUuidUsersUserUuidPostResponse>;
                     };
                 };
             };
@@ -62,17 +65,17 @@ export declare class MeshAPI extends APIBase {
             };
         };
         schemas: {
-            post: (data?: any, query?: any, token?: string) => Promise<SchemasPostResponse>;
             get: (query?: any, token?: string) => Promise<SchemasGetResponse>;
+            post: (data?: any, query?: any, token?: string) => Promise<SchemasPostResponse>;
             schemaUuid: (schemaUuid: string) => {
                 get: (query?: any, token?: string) => Promise<SchemasSchemaUuidGetResponse>;
                 post: (data?: any, query?: any, token?: string) => Promise<SchemasSchemaUuidPostResponse>;
                 delete: (token?: string) => Promise<SchemasSchemaUuidDeleteResponse>;
-                diff: {
-                    post: (data?: any, query?: any, token?: string) => Promise<SchemasSchemaUuidDiffPostResponse>;
-                };
                 changes: {
                     post: (data?: any, query?: any, token?: string) => Promise<SchemasSchemaUuidChangesPostResponse>;
+                };
+                diff: {
+                    post: (data?: any, query?: any, token?: string) => Promise<SchemasSchemaUuidDiffPostResponse>;
                 };
             };
         };
@@ -83,11 +86,11 @@ export declare class MeshAPI extends APIBase {
                 get: (query?: any, token?: string) => Promise<MicroschemasMicroschemaUuidGetResponse>;
                 post: (data?: any, query?: any, token?: string) => Promise<MicroschemasMicroschemaUuidPostResponse>;
                 delete: (token?: string) => Promise<MicroschemasMicroschemaUuidDeleteResponse>;
-                diff: {
-                    post: (data?: any, query?: any, token?: string) => Promise<MicroschemasMicroschemaUuidDiffPostResponse>;
-                };
                 changes: {
                     post: (data?: any, query?: any, token?: string) => Promise<MicroschemasMicroschemaUuidChangesPostResponse>;
+                };
+                diff: {
+                    post: (data?: any, query?: any, token?: string) => Promise<MicroschemasMicroschemaUuidDiffPostResponse>;
                 };
             };
         };
@@ -100,47 +103,41 @@ export declare class MeshAPI extends APIBase {
             };
         };
         search: {
-            users: {
-                post: (data?: any, query?: any, token?: string) => Promise<SearchUsersPostResponse>;
+            createMappings: {
+                get: (query?: any, token?: string) => Promise<SearchCreateMappingsGetResponse>;
             };
             groups: {
                 post: (data?: any, query?: any, token?: string) => Promise<SearchGroupsPostResponse>;
             };
-            roles: {
-                post: (data?: any, query?: any, token?: string) => Promise<SearchRolesPostResponse>;
+            microschemas: {
+                post: (data?: any, query?: any, token?: string) => Promise<SearchMicroschemasPostResponse>;
             };
             nodes: {
                 post: (data?: any, query?: any, token?: string) => Promise<SearchNodesPostResponse>;
             };
-            tags: {
-                post: (data?: any, query?: any, token?: string) => Promise<SearchTagsPostResponse>;
-            };
-            tagFamilies: {
-                post: (data?: any, query?: any, token?: string) => Promise<SearchTagFamiliesPostResponse>;
-            };
             projects: {
                 post: (data?: any, query?: any, token?: string) => Promise<SearchProjectsPostResponse>;
+            };
+            reindex: {
+                get: (query?: any, token?: string) => Promise<SearchReindexGetResponse>;
+            };
+            roles: {
+                post: (data?: any, query?: any, token?: string) => Promise<SearchRolesPostResponse>;
             };
             schemas: {
                 post: (data?: any, query?: any, token?: string) => Promise<SearchSchemasPostResponse>;
             };
-            microschemas: {
-                post: (data?: any, query?: any, token?: string) => Promise<SearchMicroschemasPostResponse>;
-            };
             status: {
                 get: (query?: any, token?: string) => Promise<SearchStatusGetResponse>;
             };
-            clearBatches: {
-                get: (query?: any, token?: string) => Promise<SearchClearBatchesGetResponse>;
+            tagFamilies: {
+                post: (data?: any, query?: any, token?: string) => Promise<SearchTagFamiliesPostResponse>;
             };
-            processBatches: {
-                get: (query?: any, token?: string) => Promise<SearchProcessBatchesGetResponse>;
+            tags: {
+                post: (data?: any, query?: any, token?: string) => Promise<SearchTagsPostResponse>;
             };
-            createMappings: {
-                get: (query?: any, token?: string) => Promise<SearchCreateMappingsGetResponse>;
-            };
-            reindex: {
-                get: (query?: any, token?: string) => Promise<SearchReindexGetResponse>;
+            users: {
+                post: (data?: any, query?: any, token?: string) => Promise<SearchUsersPostResponse>;
             };
         };
         utilities: {
@@ -149,15 +146,15 @@ export declare class MeshAPI extends APIBase {
             };
         };
         auth: {
-            me: {
-                get: (query?: any, token?: string) => Promise<AuthMeGetResponse>;
-            };
             login: {
                 get: (query?: any, token?: string) => Promise<AuthLoginGetResponse>;
                 post: (data?: any, query?: any, token?: string) => Promise<AuthLoginPostResponse>;
             };
             logout: {
                 get: (query?: any, token?: string) => Promise<AuthLogoutGetResponse>;
+            };
+            me: {
+                get: (query?: any, token?: string) => Promise<AuthMeGetResponse>;
             };
         };
         eventbus: {};
@@ -169,47 +166,31 @@ export declare class MeshAPI extends APIBase {
                     get: (query?: any, token?: string) => Promise<ProjectNodesNodeUuidGetResponse>;
                     post: (data?: any, query?: any, token?: string) => Promise<ProjectNodesNodeUuidPostResponse>;
                     delete: (token?: string) => Promise<ProjectNodesNodeUuidDeleteResponse>;
+                    binary: {
+                        fieldName: (fieldName: string) => {
+                            post: (data?: any, query?: any, token?: string) => Promise<ProjectNodesNodeUuidBinaryFieldNamePostResponse>;
+                            get: (query?: any, token?: string) => Promise<ProjectNodesNodeUuidBinaryFieldNameGetResponse>;
+                        };
+                    };
+                    binaryTransform: {
+                        fieldName: (fieldName: string) => {
+                            post: (data?: any, query?: any, token?: string) => Promise<ProjectNodesNodeUuidBinaryTransformFieldNamePostResponse>;
+                        };
+                    };
                     children: {
                         get: (query?: any, token?: string) => Promise<ProjectNodesNodeUuidChildrenGetResponse>;
                     };
-                    tags: {
-                        get: (query?: any, token?: string) => Promise<ProjectNodesNodeUuidTagsGetResponse>;
-                        tagUuid: (tagUuid: string) => {
-                            post: (data?: any, query?: any, token?: string) => Promise<ProjectNodesNodeUuidTagsTagUuidPostResponse>;
-                            delete: (token?: string) => Promise<ProjectNodesNodeUuidTagsTagUuidDeleteResponse>;
+                    languages: {
+                        language: (language: string) => {
+                            delete: (token?: string) => Promise<ProjectNodesNodeUuidLanguagesLanguageDeleteResponse>;
+                            published: {
+                                get: (query?: any, token?: string) => Promise<ProjectNodesNodeUuidLanguagesLanguagePublishedGetResponse>;
+                            };
                         };
                     };
                     moveTo: {
                         toUuid: (toUuid: string) => {
                             post: (data?: any, query?: any, token?: string) => Promise<ProjectNodesNodeUuidMoveToToUuidPostResponse>;
-                        };
-                    };
-                    languages: {
-                        language: (language: string) => {
-                            delete: (token?: string) => Promise<ProjectNodesNodeUuidLanguagesLanguageDeleteResponse>;
-                            fields: {
-                                field: (field: string) => {
-                                    post: (data?: any, query?: any, token?: string) => Promise<ProjectNodesNodeUuidLanguagesLanguageFieldsFieldPostResponse>;
-                                    get: (query?: any, token?: string) => Promise<ProjectNodesNodeUuidLanguagesLanguageFieldsFieldGetResponse>;
-                                    delete: (token?: string) => Promise<ProjectNodesNodeUuidLanguagesLanguageFieldsFieldDeleteResponse>;
-                                    transform: {
-                                        post: (data?: any, query?: any, token?: string) => Promise<ProjectNodesNodeUuidLanguagesLanguageFieldsFieldTransformPostResponse>;
-                                    };
-                                    itemIndex: (itemIndex: string) => {
-                                        delete: (token?: string) => Promise<ProjectNodesNodeUuidLanguagesLanguageFieldsFieldItemIndexDeleteResponse>;
-                                        get: (query?: any, token?: string) => Promise<ProjectNodesNodeUuidLanguagesLanguageFieldsFieldItemIndexGetResponse>;
-                                        post: (data?: any, query?: any, token?: string) => Promise<ProjectNodesNodeUuidLanguagesLanguageFieldsFieldItemIndexPostResponse>;
-                                        move: {
-                                            newItemIndex: (newItemIndex: string) => {
-                                                post: (data?: any, query?: any, token?: string) => Promise<ProjectNodesNodeUuidLanguagesLanguageFieldsFieldItemIndexMoveNewItemIndexPostResponse>;
-                                            };
-                                        };
-                                    };
-                                };
-                            };
-                            published: {
-                                get: (query?: any, token?: string) => Promise<ProjectNodesNodeUuidLanguagesLanguagePublishedGetResponse>;
-                            };
                         };
                     };
                     navigation: {
@@ -219,6 +200,13 @@ export declare class MeshAPI extends APIBase {
                         get: (query?: any, token?: string) => Promise<ProjectNodesNodeUuidPublishedGetResponse>;
                         post: (data?: any, query?: any, token?: string) => Promise<ProjectNodesNodeUuidPublishedPostResponse>;
                         delete: (token?: string) => Promise<ProjectNodesNodeUuidPublishedDeleteResponse>;
+                    };
+                    tags: {
+                        get: (query?: any, token?: string) => Promise<ProjectNodesNodeUuidTagsGetResponse>;
+                        tagUuid: (tagUuid: string) => {
+                            post: (data?: any, query?: any, token?: string) => Promise<ProjectNodesNodeUuidTagsTagUuidPostResponse>;
+                            delete: (token?: string) => Promise<ProjectNodesNodeUuidTagsTagUuidDeleteResponse>;
+                        };
                     };
                 };
             };
@@ -258,13 +246,13 @@ export declare class MeshAPI extends APIBase {
                 releaseUuid: (releaseUuid: string) => {
                     get: (query?: any, token?: string) => Promise<ProjectReleasesReleaseUuidGetResponse>;
                     post: (data?: any, query?: any, token?: string) => Promise<ProjectReleasesReleaseUuidPostResponse>;
-                    schemas: {
-                        get: (query?: any, token?: string) => Promise<ProjectReleasesReleaseUuidSchemasGetResponse>;
-                        post: (data?: any, query?: any, token?: string) => Promise<ProjectReleasesReleaseUuidSchemasPostResponse>;
-                    };
                     microschemas: {
                         get: (query?: any, token?: string) => Promise<ProjectReleasesReleaseUuidMicroschemasGetResponse>;
                         post: (data?: any, query?: any, token?: string) => Promise<ProjectReleasesReleaseUuidMicroschemasPostResponse>;
+                    };
+                    schemas: {
+                        get: (query?: any, token?: string) => Promise<ProjectReleasesReleaseUuidSchemasGetResponse>;
+                        post: (data?: any, query?: any, token?: string) => Promise<ProjectReleasesReleaseUuidSchemasPostResponse>;
                     };
                 };
             };
@@ -272,11 +260,11 @@ export declare class MeshAPI extends APIBase {
                 nodes: {
                     post: (data?: any, query?: any, token?: string) => Promise<ProjectSearchNodesPostResponse>;
                 };
-                tags: {
-                    post: (data?: any, query?: any, token?: string) => Promise<ProjectSearchTagsPostResponse>;
-                };
                 tagFamilies: {
                     post: (data?: any, query?: any, token?: string) => Promise<ProjectSearchTagFamiliesPostResponse>;
+                };
+                tags: {
+                    post: (data?: any, query?: any, token?: string) => Promise<ProjectSearchTagsPostResponse>;
                 };
             };
             schemas: {
@@ -300,18 +288,17 @@ export declare class MeshAPI extends APIBase {
 export interface UsersPostResponse {
     "uuid": string;
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "editor": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "edited": string;
-    "permissions": string[];
     "lastname": string;
     "firstname": string;
     "username": string;
@@ -325,23 +312,30 @@ export interface UsersPostResponse {
         "name": string;
         "uuid": string;
     }[];
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface UsersGetResponse {
     "data": {
         "uuid": string;
         "creator": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "created": string;
         "editor": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "edited": string;
-        "permissions": string[];
         "lastname": string;
         "firstname": string;
         "username": string;
@@ -355,6 +349,14 @@ export interface UsersGetResponse {
             "name": string;
             "uuid": string;
         }[];
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
     }[];
     "_metainfo": {
         "currentPage": number;
@@ -363,50 +365,20 @@ export interface UsersGetResponse {
         "totalCount": number;
     };
 }
-export interface UsersUserUuidGetResponse {
-    "uuid": string;
-    "creator": {
-        "lastName": string;
-        "firstName": string;
-        "uuid": string;
-    };
-    "created": string;
-    "editor": {
-        "lastName": string;
-        "firstName": string;
-        "uuid": string;
-    };
-    "edited": string;
-    "permissions": string[];
-    "lastname": string;
-    "firstname": string;
-    "username": string;
-    "emailAddress": string;
-    "nodeReference": {
-        "projectName": string;
-        "uuid": string;
-    };
-    "enabled": boolean;
-    "groups": {
-        "name": string;
-        "uuid": string;
-    }[];
-}
 export interface UsersUserUuidPostResponse {
     "uuid": string;
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "editor": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "edited": string;
-    "permissions": string[];
     "lastname": string;
     "firstname": string;
     "username": string;
@@ -420,48 +392,113 @@ export interface UsersUserUuidPostResponse {
         "name": string;
         "uuid": string;
     }[];
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
+}
+export interface UsersUserUuidGetResponse {
+    "uuid": string;
+    "creator": {
+        "firstName": string;
+        "lastName": string;
+        "uuid": string;
+    };
+    "created": string;
+    "editor": {
+        "firstName": string;
+        "lastName": string;
+        "uuid": string;
+    };
+    "edited": string;
+    "lastname": string;
+    "firstname": string;
+    "username": string;
+    "emailAddress": string;
+    "nodeReference": {
+        "projectName": string;
+        "uuid": string;
+    };
+    "enabled": boolean;
+    "groups": {
+        "name": string;
+        "uuid": string;
+    }[];
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface UsersUserUuidDeleteResponse {
 }
 export interface UsersUserUuidPermissionsPathGetResponse {
-    "permissions": string[];
+    "create": boolean;
+    "read": boolean;
+    "update": boolean;
+    "delete": boolean;
+}
+export interface UsersUserUuidTokenGetResponse {
+    "token": string;
+    "created": string;
 }
 export interface RolesPostResponse {
     "uuid": string;
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "editor": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "edited": string;
-    "permissions": string[];
     "name": string;
     "groups": {};
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface RolesGetResponse {
     "data": {
         "uuid": string;
         "creator": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "created": string;
         "editor": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "edited": string;
-        "permissions": string[];
         "name": string;
         "groups": {};
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
     }[];
     "_metainfo": {
         "currentPage": number;
@@ -473,38 +510,52 @@ export interface RolesGetResponse {
 export interface RolesRoleUuidGetResponse {
     "uuid": string;
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "editor": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "edited": string;
-    "permissions": string[];
     "name": string;
     "groups": {};
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface RolesRoleUuidPostResponse {
     "uuid": string;
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "editor": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "edited": string;
-    "permissions": string[];
     "name": string;
     "groups": {};
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface RolesRoleUuidDeleteResponse {
 }
@@ -512,50 +563,69 @@ export interface RolesRoleUuidPermissionsPathToElementPostResponse {
     "message": string;
 }
 export interface RolesRoleUuidPermissionsPathToElementGetResponse {
-    "permissions": string[];
+    "create": boolean;
+    "read": boolean;
+    "update": boolean;
+    "delete": boolean;
+    "publish": boolean;
+    "readPublished": boolean;
 }
 export interface GroupsPostResponse {
     "uuid": string;
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "editor": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "edited": string;
-    "permissions": string[];
     "name": string;
     "roles": {
         "name": string;
         "uuid": string;
     }[];
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface GroupsGetResponse {
     "data": {
         "uuid": string;
         "creator": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "created": string;
         "editor": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "edited": string;
-        "permissions": string[];
         "name": string;
         "roles": {
             "name": string;
             "uuid": string;
         }[];
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
     }[];
     "_metainfo": {
         "currentPage": number;
@@ -567,63 +637,139 @@ export interface GroupsGetResponse {
 export interface GroupsGroupUuidGetResponse {
     "uuid": string;
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "editor": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "edited": string;
-    "permissions": string[];
     "name": string;
     "roles": {
         "name": string;
         "uuid": string;
     }[];
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface GroupsGroupUuidPostResponse {
     "uuid": string;
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "editor": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "edited": string;
-    "permissions": string[];
     "name": string;
     "roles": {
         "name": string;
         "uuid": string;
     }[];
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface GroupsGroupUuidDeleteResponse {
+}
+export interface GroupsGroupUuidRolesGetResponse {
+    "data": {
+        "uuid": string;
+        "creator": {
+            "firstName": string;
+            "lastName": string;
+            "uuid": string;
+        };
+        "created": string;
+        "editor": {
+            "firstName": string;
+            "lastName": string;
+            "uuid": string;
+        };
+        "edited": string;
+        "name": string;
+        "groups": {};
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
+    }[];
+    "_metainfo": {
+        "currentPage": number;
+        "perPage": number;
+        "pageCount": number;
+        "totalCount": number;
+    };
+}
+export interface GroupsGroupUuidRolesRoleUuidPostResponse {
+    "uuid": string;
+    "creator": {
+        "firstName": string;
+        "lastName": string;
+        "uuid": string;
+    };
+    "created": string;
+    "editor": {
+        "firstName": string;
+        "lastName": string;
+        "uuid": string;
+    };
+    "edited": string;
+    "name": string;
+    "roles": {
+        "name": string;
+        "uuid": string;
+    }[];
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
+}
+export interface GroupsGroupUuidRolesRoleUuidDeleteResponse {
 }
 export interface GroupsGroupUuidUsersGetResponse {
     "data": {
         "uuid": string;
         "creator": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "created": string;
         "editor": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "edited": string;
-        "permissions": string[];
         "lastname": string;
         "firstname": string;
         "username": string;
@@ -637,6 +783,14 @@ export interface GroupsGroupUuidUsersGetResponse {
             "name": string;
             "uuid": string;
         }[];
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
     }[];
     "_metainfo": {
         "currentPage": number;
@@ -648,109 +802,85 @@ export interface GroupsGroupUuidUsersGetResponse {
 export interface GroupsGroupUuidUsersUserUuidPostResponse {
     "uuid": string;
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "editor": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "edited": string;
-    "permissions": string[];
     "name": string;
     "roles": {
         "name": string;
         "uuid": string;
     }[];
-}
-export interface GroupsGroupUuidRolesGetResponse {
-    "data": {
-        "uuid": string;
-        "creator": {
-            "lastName": string;
-            "firstName": string;
-            "uuid": string;
-        };
-        "created": string;
-        "editor": {
-            "lastName": string;
-            "firstName": string;
-            "uuid": string;
-        };
-        "edited": string;
-        "permissions": string[];
-        "name": string;
-        "groups": {};
-    }[];
-    "_metainfo": {
-        "currentPage": number;
-        "perPage": number;
-        "pageCount": number;
-        "totalCount": number;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
     };
-}
-export interface GroupsGroupUuidRolesRoleUuidPostResponse {
-    "uuid": string;
-    "creator": {
-        "lastName": string;
-        "firstName": string;
-        "uuid": string;
-    };
-    "created": string;
-    "editor": {
-        "lastName": string;
-        "firstName": string;
-        "uuid": string;
-    };
-    "edited": string;
-    "permissions": string[];
-    "name": string;
-    "roles": {
-        "name": string;
-        "uuid": string;
-    }[];
-}
-export interface GroupsGroupUuidRolesRoleUuidDeleteResponse {
 }
 export interface ProjectsPostResponse {
     "uuid": string;
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "editor": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "edited": string;
-    "permissions": string[];
     "name": string;
-    "rootNodeUuid": string;
+    "rootNode": {
+        "uuid": string;
+    };
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface ProjectsGetResponse {
     "data": {
         "uuid": string;
         "creator": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "created": string;
         "editor": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "edited": string;
-        "permissions": string[];
         "name": string;
-        "rootNodeUuid": string;
+        "rootNode": {
+            "uuid": string;
+        };
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
     }[];
     "_metainfo": {
         "currentPage": number;
@@ -762,61 +892,76 @@ export interface ProjectsGetResponse {
 export interface ProjectsProjectUuidGetResponse {
     "uuid": string;
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "editor": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "edited": string;
-    "permissions": string[];
     "name": string;
-    "rootNodeUuid": string;
+    "rootNode": {
+        "uuid": string;
+    };
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface ProjectsProjectUuidPostResponse {
     "uuid": string;
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "editor": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "edited": string;
-    "permissions": string[];
     "name": string;
-    "rootNodeUuid": string;
+    "rootNode": {
+        "uuid": string;
+    };
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface ProjectsProjectUuidDeleteResponse {
-}
-export interface SchemasPostResponse {
-    "uuid": string;
-    "permissions": string[];
-    "version": number;
-    "name": string;
-    "fields": any;
-    "displayField": string;
-    "segmentField": string;
-    "container": boolean;
 }
 export interface SchemasGetResponse {
     "data": {
         "uuid": string;
-        "permissions": string[];
-        "version": number;
-        "name": string;
-        "fields": any;
         "displayField": string;
         "segmentField": string;
         "container": boolean;
+        "version": number;
+        "name": string;
+        "fields": any;
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
     }[];
     "_metainfo": {
         "currentPage": number;
@@ -825,27 +970,61 @@ export interface SchemasGetResponse {
         "totalCount": number;
     };
 }
-export interface SchemasSchemaUuidGetResponse {
+export interface SchemasPostResponse {
     "uuid": string;
-    "permissions": string[];
-    "version": number;
-    "name": string;
-    "fields": any;
     "displayField": string;
     "segmentField": string;
     "container": boolean;
+    "version": number;
+    "name": string;
+    "fields": any;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
+}
+export interface SchemasSchemaUuidGetResponse {
+    "uuid": string;
+    "displayField": string;
+    "segmentField": string;
+    "container": boolean;
+    "version": number;
+    "name": string;
+    "fields": any;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface SchemasSchemaUuidPostResponse {
     "uuid": string;
-    "permissions": string[];
-    "version": number;
-    "name": string;
-    "fields": any;
     "displayField": string;
     "segmentField": string;
     "container": boolean;
+    "version": number;
+    "name": string;
+    "fields": any;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface SchemasSchemaUuidDeleteResponse {
+}
+export interface SchemasSchemaUuidChangesPostResponse {
+    "message": string;
 }
 export interface SchemasSchemaUuidDiffPostResponse {
     "changes": {
@@ -858,25 +1037,36 @@ export interface SchemasSchemaUuidDiffPostResponse {
         };
     }[];
 }
-export interface SchemasSchemaUuidChangesPostResponse {
-    "message": string;
-}
 export interface MicroschemasPostResponse {
     "uuid": string;
-    "permissions": string[];
     "version": number;
     "description": string;
     "name": string;
     "fields": any;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface MicroschemasGetResponse {
     "data": {
         "uuid": string;
-        "permissions": string[];
         "version": number;
         "description": string;
         "name": string;
         "fields": any;
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
     }[];
     "_metainfo": {
         "currentPage": number;
@@ -887,21 +1077,38 @@ export interface MicroschemasGetResponse {
 }
 export interface MicroschemasMicroschemaUuidGetResponse {
     "uuid": string;
-    "permissions": string[];
     "version": number;
     "description": string;
     "name": string;
     "fields": any;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface MicroschemasMicroschemaUuidPostResponse {
     "uuid": string;
-    "permissions": string[];
     "version": number;
     "description": string;
     "name": string;
     "fields": any;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface MicroschemasMicroschemaUuidDeleteResponse {
+}
+export interface MicroschemasMicroschemaUuidChangesPostResponse {
+    "message": string;
 }
 export interface MicroschemasMicroschemaUuidDiffPostResponse {
     "changes": {
@@ -914,31 +1121,327 @@ export interface MicroschemasMicroschemaUuidDiffPostResponse {
         };
     }[];
 }
-export interface MicroschemasMicroschemaUuidChangesPostResponse {
-    "message": string;
-}
 export interface AdminStatusGetResponse {
     "message": string;
 }
 export interface AdminStatusMigrationsGetResponse {
     "message": string;
 }
-export interface SearchUsersPostResponse {
+export interface SearchCreateMappingsGetResponse {
+    "message": string;
+}
+export interface SearchGroupsPostResponse {
     "data": {
         "uuid": string;
         "creator": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "created": string;
         "editor": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "edited": string;
-        "permissions": string[];
+        "name": string;
+        "roles": {
+            "name": string;
+            "uuid": string;
+        }[];
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
+    }[];
+    "_metainfo": {
+        "currentPage": number;
+        "perPage": number;
+        "pageCount": number;
+        "totalCount": number;
+    };
+}
+export interface SearchMicroschemasPostResponse {
+    "data": {
+        "uuid": string;
+        "version": number;
+        "description": string;
+        "name": string;
+        "fields": any;
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
+    }[];
+    "_metainfo": {
+        "currentPage": number;
+        "perPage": number;
+        "pageCount": number;
+        "totalCount": number;
+    };
+}
+export interface SearchNodesPostResponse {
+    "data": {
+        "uuid": string;
+        "creator": {
+            "firstName": string;
+            "lastName": string;
+            "uuid": string;
+        };
+        "created": string;
+        "edited": string;
+        "availableLanguages": string[];
+        "languagePaths": {
+            "de": string;
+            "en": string;
+        };
+        "parentNode": {
+            "uuid": string;
+            "displayName": string;
+        };
+        "tags": {
+            "types": {
+                "items": {
+                    "name": string;
+                    "uuid": string;
+                }[];
+            };
+            "colors": {
+                "items": {
+                    "name": string;
+                    "uuid": string;
+                }[];
+            };
+        };
+        "childrenInfo": {
+            "folder": {
+                "schemaUuid": string;
+                "count": number;
+            };
+            "blogpost": {
+                "schemaUuid": string;
+                "count": number;
+            };
+        };
+        "schema": {
+            "name": string;
+            "uuid": string;
+            "version": number;
+        };
+        "fields": any;
+        "path": string;
+        "breadcrumb": {
+            "uuid": string;
+            "displayName": string;
+            "path": string;
+        }[];
+        "container": boolean;
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
+    }[];
+    "_metainfo": {
+        "currentPage": number;
+        "perPage": number;
+        "pageCount": number;
+        "totalCount": number;
+    };
+}
+export interface SearchProjectsPostResponse {
+    "data": {
+        "uuid": string;
+        "creator": {
+            "firstName": string;
+            "lastName": string;
+            "uuid": string;
+        };
+        "created": string;
+        "editor": {
+            "firstName": string;
+            "lastName": string;
+            "uuid": string;
+        };
+        "edited": string;
+        "name": string;
+        "rootNode": {
+            "uuid": string;
+        };
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
+    }[];
+    "_metainfo": {
+        "currentPage": number;
+        "perPage": number;
+        "pageCount": number;
+        "totalCount": number;
+    };
+}
+export interface SearchReindexGetResponse {
+    "message": string;
+}
+export interface SearchRolesPostResponse {
+    "data": {
+        "uuid": string;
+        "creator": {
+            "firstName": string;
+            "lastName": string;
+            "uuid": string;
+        };
+        "created": string;
+        "editor": {
+            "firstName": string;
+            "lastName": string;
+            "uuid": string;
+        };
+        "edited": string;
+        "name": string;
+        "groups": {};
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
+    }[];
+    "_metainfo": {
+        "currentPage": number;
+        "perPage": number;
+        "pageCount": number;
+        "totalCount": number;
+    };
+}
+export interface SearchSchemasPostResponse {
+    "data": {
+        "uuid": string;
+        "displayField": string;
+        "segmentField": string;
+        "container": boolean;
+        "version": number;
+        "name": string;
+        "fields": any;
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
+    }[];
+    "_metainfo": {
+        "currentPage": number;
+        "perPage": number;
+        "pageCount": number;
+        "totalCount": number;
+    };
+}
+export interface SearchStatusGetResponse {
+    "message": string;
+}
+export interface SearchTagFamiliesPostResponse {
+    "data": {
+        "creator": {
+            "firstName": string;
+            "lastName": string;
+            "uuid": string;
+        };
+        "created": string;
+        "editor": {
+            "firstName": string;
+            "lastName": string;
+            "uuid": string;
+        };
+        "edited": string;
+        "name": string;
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
+    }[];
+    "_metainfo": {
+        "currentPage": number;
+        "perPage": number;
+        "pageCount": number;
+        "totalCount": number;
+    };
+}
+export interface SearchTagsPostResponse {
+    "data": {
+        "uuid": string;
+        "creator": {
+            "firstName": string;
+            "lastName": string;
+            "uuid": string;
+        };
+        "created": string;
+        "editor": {
+            "firstName": string;
+            "lastName": string;
+            "uuid": string;
+        };
+        "edited": string;
+        "tagFamily": {
+            "name": string;
+            "uuid": string;
+        };
+        "name": string;
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
+    }[];
+    "_metainfo": {
+        "currentPage": number;
+        "perPage": number;
+        "pageCount": number;
+        "totalCount": number;
+    };
+}
+export interface SearchUsersPostResponse {
+    "data": {
+        "uuid": string;
+        "creator": {
+            "firstName": string;
+            "lastName": string;
+            "uuid": string;
+        };
+        "created": string;
+        "editor": {
+            "firstName": string;
+            "lastName": string;
+            "uuid": string;
+        };
+        "edited": string;
         "lastname": string;
         "firstname": string;
         "username": string;
@@ -952,6 +1455,14 @@ export interface SearchUsersPostResponse {
             "name": string;
             "uuid": string;
         }[];
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
     }[];
     "_metainfo": {
         "currentPage": number;
@@ -959,272 +1470,31 @@ export interface SearchUsersPostResponse {
         "pageCount": number;
         "totalCount": number;
     };
-}
-export interface SearchGroupsPostResponse {
-    "data": {
-        "uuid": string;
-        "creator": {
-            "lastName": string;
-            "firstName": string;
-            "uuid": string;
-        };
-        "created": string;
-        "editor": {
-            "lastName": string;
-            "firstName": string;
-            "uuid": string;
-        };
-        "edited": string;
-        "permissions": string[];
-        "name": string;
-        "roles": {
-            "name": string;
-            "uuid": string;
-        }[];
-    }[];
-    "_metainfo": {
-        "currentPage": number;
-        "perPage": number;
-        "pageCount": number;
-        "totalCount": number;
-    };
-}
-export interface SearchRolesPostResponse {
-    "data": {
-        "uuid": string;
-        "creator": {
-            "lastName": string;
-            "firstName": string;
-            "uuid": string;
-        };
-        "created": string;
-        "editor": {
-            "lastName": string;
-            "firstName": string;
-            "uuid": string;
-        };
-        "edited": string;
-        "permissions": string[];
-        "name": string;
-        "groups": {};
-    }[];
-    "_metainfo": {
-        "currentPage": number;
-        "perPage": number;
-        "pageCount": number;
-        "totalCount": number;
-    };
-}
-export interface SearchNodesPostResponse {
-    "data": {
-        "uuid": string;
-        "creator": {
-            "lastName": string;
-            "firstName": string;
-            "uuid": string;
-        };
-        "created": string;
-        "edited": string;
-        "permissions": string[];
-        "availableLanguages": string[];
-        "languagePaths": {
-            "de": string;
-            "en": string;
-        };
-        "parentNode": {
-            "uuid": string;
-            "displayName": string;
-        };
-        "tags": {
-            "types": {
-                "items": {
-                    "name": string;
-                    "uuid": string;
-                }[];
-            };
-            "colors": {
-                "items": {
-                    "name": string;
-                    "uuid": string;
-                }[];
-            };
-        };
-        "childrenInfo": {
-            "folder": {
-                "schemaUuid": string;
-                "count": number;
-            };
-            "blogpost": {
-                "schemaUuid": string;
-                "count": number;
-            };
-        };
-        "schema": {
-            "name": string;
-            "uuid": string;
-            "version": number;
-        };
-        "fields": any;
-        "path": string;
-        "breadcrumb": {
-            "uuid": string;
-            "displayName": string;
-            "path": string;
-        }[];
-        "container": boolean;
-    }[];
-    "_metainfo": {
-        "currentPage": number;
-        "perPage": number;
-        "pageCount": number;
-        "totalCount": number;
-    };
-}
-export interface SearchTagsPostResponse {
-    "data": {
-        "uuid": string;
-        "creator": {
-            "lastName": string;
-            "firstName": string;
-            "uuid": string;
-        };
-        "created": string;
-        "editor": {
-            "lastName": string;
-            "firstName": string;
-            "uuid": string;
-        };
-        "edited": string;
-        "permissions": string[];
-        "tagFamily": {
-            "name": string;
-            "uuid": string;
-        };
-        "name": string;
-    }[];
-    "_metainfo": {
-        "currentPage": number;
-        "perPage": number;
-        "pageCount": number;
-        "totalCount": number;
-    };
-}
-export interface SearchTagFamiliesPostResponse {
-    "data": {
-        "creator": {
-            "lastName": string;
-            "firstName": string;
-            "uuid": string;
-        };
-        "created": string;
-        "editor": {
-            "lastName": string;
-            "firstName": string;
-            "uuid": string;
-        };
-        "edited": string;
-        "permissions": string[];
-        "name": string;
-    }[];
-    "_metainfo": {
-        "currentPage": number;
-        "perPage": number;
-        "pageCount": number;
-        "totalCount": number;
-    };
-}
-export interface SearchProjectsPostResponse {
-    "data": {
-        "uuid": string;
-        "creator": {
-            "lastName": string;
-            "firstName": string;
-            "uuid": string;
-        };
-        "created": string;
-        "editor": {
-            "lastName": string;
-            "firstName": string;
-            "uuid": string;
-        };
-        "edited": string;
-        "permissions": string[];
-        "name": string;
-        "rootNodeUuid": string;
-    }[];
-    "_metainfo": {
-        "currentPage": number;
-        "perPage": number;
-        "pageCount": number;
-        "totalCount": number;
-    };
-}
-export interface SearchSchemasPostResponse {
-    "data": {
-        "uuid": string;
-        "permissions": string[];
-        "version": number;
-        "name": string;
-        "fields": any;
-        "displayField": string;
-        "segmentField": string;
-        "container": boolean;
-    }[];
-    "_metainfo": {
-        "currentPage": number;
-        "perPage": number;
-        "pageCount": number;
-        "totalCount": number;
-    };
-}
-export interface SearchMicroschemasPostResponse {
-    "data": {
-        "uuid": string;
-        "permissions": string[];
-        "version": number;
-        "description": string;
-        "name": string;
-        "fields": any;
-    }[];
-    "_metainfo": {
-        "currentPage": number;
-        "perPage": number;
-        "pageCount": number;
-        "totalCount": number;
-    };
-}
-export interface SearchStatusGetResponse {
-    "message": string;
-}
-export interface SearchClearBatchesGetResponse {
-    "message": string;
-}
-export interface SearchProcessBatchesGetResponse {
-    "message": string;
-}
-export interface SearchCreateMappingsGetResponse {
-    "message": string;
-}
-export interface SearchReindexGetResponse {
-    "message": string;
 }
 export interface UtilitiesLinkResolverPostResponse {
+}
+export interface AuthLoginGetResponse {
+}
+export interface AuthLoginPostResponse {
+    "token": string;
+}
+export interface AuthLogoutGetResponse {
+    "message": string;
 }
 export interface AuthMeGetResponse {
     "uuid": string;
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "editor": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "edited": string;
-    "permissions": string[];
     "lastname": string;
     "firstname": string;
     "username": string;
@@ -1238,25 +1508,24 @@ export interface AuthMeGetResponse {
         "name": string;
         "uuid": string;
     }[];
-}
-export interface AuthLoginGetResponse {
-}
-export interface AuthLoginPostResponse {
-    "token": string;
-}
-export interface AuthLogoutGetResponse {
-    "message": string;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface ProjectNodesPostResponse {
     "uuid": string;
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "edited": string;
-    "permissions": string[];
     "availableLanguages": string[];
     "languagePaths": {
         "de": string;
@@ -1303,18 +1572,25 @@ export interface ProjectNodesPostResponse {
         "path": string;
     }[];
     "container": boolean;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface ProjectNodesGetResponse {
     "data": {
         "uuid": string;
         "creator": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "created": string;
         "edited": string;
-        "permissions": string[];
         "availableLanguages": string[];
         "languagePaths": {
             "de": string;
@@ -1361,6 +1637,14 @@ export interface ProjectNodesGetResponse {
             "path": string;
         }[];
         "container": boolean;
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
     }[];
     "_metainfo": {
         "currentPage": number;
@@ -1372,13 +1656,12 @@ export interface ProjectNodesGetResponse {
 export interface ProjectNodesNodeUuidGetResponse {
     "uuid": string;
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "edited": string;
-    "permissions": string[];
     "availableLanguages": string[];
     "languagePaths": {
         "de": string;
@@ -1425,22 +1708,29 @@ export interface ProjectNodesNodeUuidGetResponse {
         "path": string;
     }[];
     "container": boolean;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface ProjectNodesNodeUuidPostResponse {
     "uuid": string;
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "editor": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "edited": string;
-    "permissions": string[];
     "parentNode": {
         "uuid": string;
         "displayName": string;
@@ -1472,20 +1762,157 @@ export interface ProjectNodesNodeUuidPostResponse {
         "path": string;
     }[];
     "container": boolean;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface ProjectNodesNodeUuidDeleteResponse {
+}
+export interface ProjectNodesNodeUuidBinaryFieldNamePostResponse {
+    "uuid": string;
+    "creator": {
+        "firstName": string;
+        "lastName": string;
+        "uuid": string;
+    };
+    "created": string;
+    "edited": string;
+    "availableLanguages": string[];
+    "languagePaths": {
+        "de": string;
+        "en": string;
+    };
+    "parentNode": {
+        "uuid": string;
+        "displayName": string;
+    };
+    "tags": {
+        "types": {
+            "items": {
+                "name": string;
+                "uuid": string;
+            }[];
+        };
+        "colors": {
+            "items": {
+                "name": string;
+                "uuid": string;
+            }[];
+        };
+    };
+    "childrenInfo": {
+        "folder": {
+            "schemaUuid": string;
+            "count": number;
+        };
+        "blogpost": {
+            "schemaUuid": string;
+            "count": number;
+        };
+    };
+    "schema": {
+        "name": string;
+        "uuid": string;
+        "version": number;
+    };
+    "fields": any;
+    "path": string;
+    "breadcrumb": {
+        "uuid": string;
+        "displayName": string;
+        "path": string;
+    }[];
+    "container": boolean;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
+}
+export interface ProjectNodesNodeUuidBinaryFieldNameGetResponse {
+}
+export interface ProjectNodesNodeUuidBinaryTransformFieldNamePostResponse {
+    "uuid": string;
+    "creator": {
+        "firstName": string;
+        "lastName": string;
+        "uuid": string;
+    };
+    "created": string;
+    "edited": string;
+    "availableLanguages": string[];
+    "languagePaths": {
+        "de": string;
+        "en": string;
+    };
+    "parentNode": {
+        "uuid": string;
+        "displayName": string;
+    };
+    "tags": {
+        "types": {
+            "items": {
+                "name": string;
+                "uuid": string;
+            }[];
+        };
+        "colors": {
+            "items": {
+                "name": string;
+                "uuid": string;
+            }[];
+        };
+    };
+    "childrenInfo": {
+        "folder": {
+            "schemaUuid": string;
+            "count": number;
+        };
+        "blogpost": {
+            "schemaUuid": string;
+            "count": number;
+        };
+    };
+    "schema": {
+        "name": string;
+        "uuid": string;
+        "version": number;
+    };
+    "fields": any;
+    "path": string;
+    "breadcrumb": {
+        "uuid": string;
+        "displayName": string;
+        "path": string;
+    }[];
+    "container": boolean;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface ProjectNodesNodeUuidChildrenGetResponse {
     "data": {
         "uuid": string;
         "creator": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "created": string;
         "edited": string;
-        "permissions": string[];
         "availableLanguages": string[];
         "languagePaths": {
             "de": string;
@@ -1532,6 +1959,14 @@ export interface ProjectNodesNodeUuidChildrenGetResponse {
             "path": string;
         }[];
         "container": boolean;
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
     }[];
     "_metainfo": {
         "currentPage": number;
@@ -1539,107 +1974,8 @@ export interface ProjectNodesNodeUuidChildrenGetResponse {
         "pageCount": number;
         "totalCount": number;
     };
-}
-export interface ProjectNodesNodeUuidTagsGetResponse {
-    "data": {
-        "uuid": string;
-        "creator": {
-            "lastName": string;
-            "firstName": string;
-            "uuid": string;
-        };
-        "created": string;
-        "editor": {
-            "lastName": string;
-            "firstName": string;
-            "uuid": string;
-        };
-        "edited": string;
-        "permissions": string[];
-        "tagFamily": {
-            "name": string;
-            "uuid": string;
-        };
-        "name": string;
-    }[];
-    "_metainfo": {
-        "currentPage": number;
-        "perPage": number;
-        "pageCount": number;
-        "totalCount": number;
-    };
-}
-export interface ProjectNodesNodeUuidTagsTagUuidPostResponse {
-    "uuid": string;
-    "creator": {
-        "lastName": string;
-        "firstName": string;
-        "uuid": string;
-    };
-    "created": string;
-    "editor": {
-        "lastName": string;
-        "firstName": string;
-        "uuid": string;
-    };
-    "edited": string;
-    "permissions": string[];
-    "parentNode": {
-        "uuid": string;
-        "displayName": string;
-    };
-    "tags": {
-        "types": {
-            "items": {
-                "name": string;
-                "uuid": string;
-            }[];
-        };
-        "colors": {
-            "items": {
-                "name": string;
-                "uuid": string;
-            }[];
-        };
-    };
-    "childrenInfo": {};
-    "schema": {
-        "name": string;
-        "uuid": string;
-        "version": number;
-    };
-    "fields": any;
-    "breadcrumb": {
-        "uuid": string;
-        "displayName": string;
-        "path": string;
-    }[];
-    "container": boolean;
-}
-export interface ProjectNodesNodeUuidTagsTagUuidDeleteResponse {
-}
-export interface ProjectNodesNodeUuidMoveToToUuidPostResponse {
 }
 export interface ProjectNodesNodeUuidLanguagesLanguageDeleteResponse {
-}
-export interface ProjectNodesNodeUuidLanguagesLanguageFieldsFieldPostResponse {
-}
-export interface ProjectNodesNodeUuidLanguagesLanguageFieldsFieldGetResponse {
-}
-export interface ProjectNodesNodeUuidLanguagesLanguageFieldsFieldDeleteResponse {
-}
-export interface ProjectNodesNodeUuidLanguagesLanguageFieldsFieldTransformPostResponse {
-    "message": string;
-}
-export interface ProjectNodesNodeUuidLanguagesLanguageFieldsFieldItemIndexDeleteResponse {
-    "message": string;
-}
-export interface ProjectNodesNodeUuidLanguagesLanguageFieldsFieldItemIndexGetResponse {
-    "message": string;
-}
-export interface ProjectNodesNodeUuidLanguagesLanguageFieldsFieldItemIndexPostResponse {
-}
-export interface ProjectNodesNodeUuidLanguagesLanguageFieldsFieldItemIndexMoveNewItemIndexPostResponse {
 }
 export interface ProjectNodesNodeUuidLanguagesLanguagePublishedGetResponse {
     "published": boolean;
@@ -1648,16 +1984,16 @@ export interface ProjectNodesNodeUuidLanguagesLanguagePublishedGetResponse {
         "number": string;
     };
     "publisher": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "publishDate": string;
 }
+export interface ProjectNodesNodeUuidMoveToToUuidPostResponse {
+}
 export interface ProjectNodesNodeUuidNavigationGetResponse {
-    "root": {
-        "uuid": string;
-    };
+    "uuid": string;
 }
 export interface ProjectNodesNodeUuidPublishedGetResponse {
     "availableLanguages": {
@@ -1675,8 +2011,8 @@ export interface ProjectNodesNodeUuidPublishedGetResponse {
                 "number": string;
             };
             "publisher": {
-                "lastName": string;
                 "firstName": string;
+                "lastName": string;
                 "uuid": string;
             };
             "publishDate": string;
@@ -1706,8 +2042,8 @@ export interface ProjectNodesNodeUuidPublishedPostResponse {
                 "number": string;
             };
             "publisher": {
-                "lastName": string;
                 "firstName": string;
+                "lastName": string;
                 "uuid": string;
             };
             "publishDate": string;
@@ -1723,22 +2059,121 @@ export interface ProjectNodesNodeUuidPublishedPostResponse {
 }
 export interface ProjectNodesNodeUuidPublishedDeleteResponse {
 }
-export interface ProjectTagFamiliesGetResponse {
+export interface ProjectNodesNodeUuidTagsGetResponse {
     "data": {
+        "uuid": string;
         "creator": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "created": string;
         "editor": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "edited": string;
-        "permissions": string[];
+        "tagFamily": {
+            "name": string;
+            "uuid": string;
+        };
         "name": string;
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
+    }[];
+    "_metainfo": {
+        "currentPage": number;
+        "perPage": number;
+        "pageCount": number;
+        "totalCount": number;
+    };
+}
+export interface ProjectNodesNodeUuidTagsTagUuidPostResponse {
+    "uuid": string;
+    "creator": {
+        "firstName": string;
+        "lastName": string;
+        "uuid": string;
+    };
+    "created": string;
+    "editor": {
+        "firstName": string;
+        "lastName": string;
+        "uuid": string;
+    };
+    "edited": string;
+    "parentNode": {
+        "uuid": string;
+        "displayName": string;
+    };
+    "tags": {
+        "types": {
+            "items": {
+                "name": string;
+                "uuid": string;
+            }[];
+        };
+        "colors": {
+            "items": {
+                "name": string;
+                "uuid": string;
+            }[];
+        };
+    };
+    "childrenInfo": {};
+    "schema": {
+        "name": string;
+        "uuid": string;
+        "version": number;
+    };
+    "fields": any;
+    "breadcrumb": {
+        "uuid": string;
+        "displayName": string;
+        "path": string;
+    }[];
+    "container": boolean;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
+}
+export interface ProjectNodesNodeUuidTagsTagUuidDeleteResponse {
+}
+export interface ProjectTagFamiliesGetResponse {
+    "data": {
+        "creator": {
+            "firstName": string;
+            "lastName": string;
+            "uuid": string;
+        };
+        "created": string;
+        "editor": {
+            "firstName": string;
+            "lastName": string;
+            "uuid": string;
+        };
+        "edited": string;
+        "name": string;
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
     }[];
     "_metainfo": {
         "currentPage": number;
@@ -1749,51 +2184,72 @@ export interface ProjectTagFamiliesGetResponse {
 }
 export interface ProjectTagFamiliesPostResponse {
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "editor": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "edited": string;
-    "permissions": string[];
     "name": string;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface ProjectTagFamiliesTagFamilyUuidGetResponse {
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "editor": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "edited": string;
-    "permissions": string[];
     "name": string;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface ProjectTagFamiliesTagFamilyUuidPostResponse {
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "editor": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "edited": string;
-    "permissions": string[];
     "name": string;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface ProjectTagFamiliesTagFamilyUuidDeleteResponse {
 }
@@ -1801,23 +2257,30 @@ export interface ProjectTagFamiliesTagFamilyUuidTagsGetResponse {
     "data": {
         "uuid": string;
         "creator": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "created": string;
         "editor": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "edited": string;
-        "permissions": string[];
         "tagFamily": {
             "name": string;
             "uuid": string;
         };
         "name": string;
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
     }[];
     "_metainfo": {
         "currentPage": number;
@@ -1829,44 +2292,58 @@ export interface ProjectTagFamiliesTagFamilyUuidTagsGetResponse {
 export interface ProjectTagFamiliesTagFamilyUuidTagsTagUuidGetResponse {
     "uuid": string;
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "editor": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "edited": string;
-    "permissions": string[];
     "tagFamily": {
         "name": string;
         "uuid": string;
     };
     "name": string;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface ProjectTagFamiliesTagFamilyUuidTagsTagUuidPostResponse {
     "uuid": string;
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "editor": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "edited": string;
-    "permissions": string[];
     "tagFamily": {
         "name": string;
         "uuid": string;
     };
     "name": string;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface ProjectTagFamiliesTagFamilyUuidTagsTagUuidDeleteResponse {
 }
@@ -1874,13 +2351,12 @@ export interface ProjectTagFamiliesTagFamilyUuidTagsTagUuidNodesGetResponse {
     "data": {
         "uuid": string;
         "creator": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "created": string;
         "edited": string;
-        "permissions": string[];
         "availableLanguages": string[];
         "languagePaths": {
             "de": string;
@@ -1927,6 +2403,14 @@ export interface ProjectTagFamiliesTagFamilyUuidTagsTagUuidNodesGetResponse {
             "path": string;
         }[];
         "container": boolean;
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
     }[];
     "_metainfo": {
         "currentPage": number;
@@ -1936,18 +2420,82 @@ export interface ProjectTagFamiliesTagFamilyUuidTagsTagUuidNodesGetResponse {
     };
 }
 export interface ProjectNavrootPathGetResponse {
-    "root": {
+    "uuid": string;
+    "node": {
+        "uuid": string;
+        "creator": {
+            "firstName": string;
+            "lastName": string;
+            "uuid": string;
+        };
+        "created": string;
+        "edited": string;
+        "availableLanguages": string[];
+        "languagePaths": {
+            "de": string;
+            "en": string;
+        };
+        "parentNode": {
+            "uuid": string;
+            "displayName": string;
+        };
+        "tags": {
+            "types": {
+                "items": {
+                    "name": string;
+                    "uuid": string;
+                }[];
+            };
+            "colors": {
+                "items": {
+                    "name": string;
+                    "uuid": string;
+                }[];
+            };
+        };
+        "childrenInfo": {
+            "folder": {
+                "schemaUuid": string;
+                "count": number;
+            };
+            "blogpost": {
+                "schemaUuid": string;
+                "count": number;
+            };
+        };
+        "schema": {
+            "name": string;
+            "uuid": string;
+            "version": number;
+        };
+        "fields": any;
+        "path": string;
+        "breadcrumb": {
+            "uuid": string;
+            "displayName": string;
+            "path": string;
+        }[];
+        "container": boolean;
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
+    };
+    "children": {
         "uuid": string;
         "node": {
             "uuid": string;
             "creator": {
-                "lastName": string;
                 "firstName": string;
+                "lastName": string;
                 "uuid": string;
             };
             "created": string;
             "edited": string;
-            "permissions": string[];
             "availableLanguages": string[];
             "languagePaths": {
                 "de": string;
@@ -1994,109 +2542,85 @@ export interface ProjectNavrootPathGetResponse {
                 "path": string;
             }[];
             "container": boolean;
-        };
-        "children": {
-            "uuid": string;
-            "node": {
-                "uuid": string;
-                "creator": {
-                    "lastName": string;
-                    "firstName": string;
-                    "uuid": string;
-                };
-                "created": string;
-                "edited": string;
-                "permissions": string[];
-                "availableLanguages": string[];
-                "languagePaths": {
-                    "de": string;
-                    "en": string;
-                };
-                "parentNode": {
-                    "uuid": string;
-                    "displayName": string;
-                };
-                "tags": {
-                    "types": {
-                        "items": {
-                            "name": string;
-                            "uuid": string;
-                        }[];
-                    };
-                    "colors": {
-                        "items": {
-                            "name": string;
-                            "uuid": string;
-                        }[];
-                    };
-                };
-                "childrenInfo": {
-                    "folder": {
-                        "schemaUuid": string;
-                        "count": number;
-                    };
-                    "blogpost": {
-                        "schemaUuid": string;
-                        "count": number;
-                    };
-                };
-                "schema": {
-                    "name": string;
-                    "uuid": string;
-                    "version": number;
-                };
-                "fields": any;
-                "path": string;
-                "breadcrumb": {
-                    "uuid": string;
-                    "displayName": string;
-                    "path": string;
-                }[];
-                "container": boolean;
+            "permissions": {
+                "create": boolean;
+                "read": boolean;
+                "update": boolean;
+                "delete": boolean;
+                "publish": boolean;
+                "readPublished": boolean;
             };
-        }[];
-    };
+        };
+    }[];
 }
 export interface ProjectWebrootPathGetResponse {
 }
 export interface ProjectReleasesPostResponse {
     "uuid": string;
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "editor": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "edited": string;
-    "permissions": string[];
-    "rolePerms": string[];
     "name": string;
     "migrated": boolean;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
+    "rolePerms": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface ProjectReleasesGetResponse {
     "data": {
         "uuid": string;
         "creator": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "created": string;
         "editor": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "edited": string;
-        "permissions": string[];
-        "rolePerms": string[];
         "name": string;
         "migrated": boolean;
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
+        "rolePerms": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
     }[];
     "_metainfo": {
         "currentPage": number;
@@ -2108,40 +2632,92 @@ export interface ProjectReleasesGetResponse {
 export interface ProjectReleasesReleaseUuidGetResponse {
     "uuid": string;
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "editor": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "edited": string;
-    "permissions": string[];
-    "rolePerms": string[];
     "name": string;
     "migrated": boolean;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
+    "rolePerms": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface ProjectReleasesReleaseUuidPostResponse {
     "uuid": string;
     "creator": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "created": string;
     "editor": {
-        "lastName": string;
         "firstName": string;
+        "lastName": string;
         "uuid": string;
     };
     "edited": string;
-    "permissions": string[];
-    "rolePerms": string[];
     "name": string;
     "migrated": boolean;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
+    "rolePerms": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
+}
+export interface ProjectReleasesReleaseUuidMicroschemasGetResponse {
+    "0": {
+        "name": string;
+        "uuid": string;
+        "version": number;
+    };
+    "1": {
+        "name": string;
+        "uuid": string;
+        "version": number;
+    };
+}
+export interface ProjectReleasesReleaseUuidMicroschemasPostResponse {
+    "0": {
+        "name": string;
+        "uuid": string;
+        "version": number;
+    };
+    "1": {
+        "name": string;
+        "uuid": string;
+        "version": number;
+    };
 }
 export interface ProjectReleasesReleaseUuidSchemasGetResponse {
     "0": {
@@ -2177,41 +2753,16 @@ export interface ProjectReleasesReleaseUuidSchemasPostResponse {
         "version": number;
     };
 }
-export interface ProjectReleasesReleaseUuidMicroschemasGetResponse {
-    "0": {
-        "name": string;
-        "uuid": string;
-        "version": number;
-    };
-    "1": {
-        "name": string;
-        "uuid": string;
-        "version": number;
-    };
-}
-export interface ProjectReleasesReleaseUuidMicroschemasPostResponse {
-    "0": {
-        "name": string;
-        "uuid": string;
-        "version": number;
-    };
-    "1": {
-        "name": string;
-        "uuid": string;
-        "version": number;
-    };
-}
 export interface ProjectSearchNodesPostResponse {
     "data": {
         "uuid": string;
         "creator": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "created": string;
         "edited": string;
-        "permissions": string[];
         "availableLanguages": string[];
         "languagePaths": {
             "de": string;
@@ -2258,6 +2809,45 @@ export interface ProjectSearchNodesPostResponse {
             "path": string;
         }[];
         "container": boolean;
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
+    }[];
+    "_metainfo": {
+        "currentPage": number;
+        "perPage": number;
+        "pageCount": number;
+        "totalCount": number;
+    };
+}
+export interface ProjectSearchTagFamiliesPostResponse {
+    "data": {
+        "creator": {
+            "firstName": string;
+            "lastName": string;
+            "uuid": string;
+        };
+        "created": string;
+        "editor": {
+            "firstName": string;
+            "lastName": string;
+            "uuid": string;
+        };
+        "edited": string;
+        "name": string;
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
     }[];
     "_metainfo": {
         "currentPage": number;
@@ -2270,47 +2860,30 @@ export interface ProjectSearchTagsPostResponse {
     "data": {
         "uuid": string;
         "creator": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "created": string;
         "editor": {
-            "lastName": string;
             "firstName": string;
+            "lastName": string;
             "uuid": string;
         };
         "edited": string;
-        "permissions": string[];
         "tagFamily": {
             "name": string;
             "uuid": string;
         };
         "name": string;
-    }[];
-    "_metainfo": {
-        "currentPage": number;
-        "perPage": number;
-        "pageCount": number;
-        "totalCount": number;
-    };
-}
-export interface ProjectSearchTagFamiliesPostResponse {
-    "data": {
-        "creator": {
-            "lastName": string;
-            "firstName": string;
-            "uuid": string;
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
         };
-        "created": string;
-        "editor": {
-            "lastName": string;
-            "firstName": string;
-            "uuid": string;
-        };
-        "edited": string;
-        "permissions": string[];
-        "name": string;
     }[];
     "_metainfo": {
         "currentPage": number;
@@ -2322,13 +2895,20 @@ export interface ProjectSearchTagFamiliesPostResponse {
 export interface ProjectSchemasGetResponse {
     "data": {
         "uuid": string;
-        "permissions": string[];
-        "version": number;
-        "name": string;
-        "fields": any;
         "displayField": string;
         "segmentField": string;
         "container": boolean;
+        "version": number;
+        "name": string;
+        "fields": any;
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
     }[];
     "_metainfo": {
         "currentPage": number;
@@ -2339,34 +2919,55 @@ export interface ProjectSchemasGetResponse {
 }
 export interface ProjectSchemasSchemaUuidGetResponse {
     "uuid": string;
-    "permissions": string[];
-    "version": number;
-    "name": string;
-    "fields": any;
     "displayField": string;
     "segmentField": string;
     "container": boolean;
+    "version": number;
+    "name": string;
+    "fields": any;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface ProjectSchemasSchemaUuidPostResponse {
     "uuid": string;
-    "permissions": string[];
-    "version": number;
-    "name": string;
-    "fields": any;
     "displayField": string;
     "segmentField": string;
     "container": boolean;
+    "version": number;
+    "name": string;
+    "fields": any;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface ProjectSchemasSchemaUuidDeleteResponse {
 }
 export interface ProjectMicroschemasGetResponse {
     "data": {
         "uuid": string;
-        "permissions": string[];
         "version": number;
         "description": string;
         "name": string;
         "fields": any;
+        "permissions": {
+            "create": boolean;
+            "read": boolean;
+            "update": boolean;
+            "delete": boolean;
+            "publish": boolean;
+            "readPublished": boolean;
+        };
     }[];
     "_metainfo": {
         "currentPage": number;
@@ -2377,11 +2978,18 @@ export interface ProjectMicroschemasGetResponse {
 }
 export interface ProjectMicroschemasMicroschemaUuidPostResponse {
     "uuid": string;
-    "permissions": string[];
     "version": number;
     "description": string;
     "name": string;
     "fields": any;
+    "permissions": {
+        "create": boolean;
+        "read": boolean;
+        "update": boolean;
+        "delete": boolean;
+        "publish": boolean;
+        "readPublished": boolean;
+    };
 }
 export interface ProjectMicroschemasMicroschemaUuidDeleteResponse {
 }
