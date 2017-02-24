@@ -2,7 +2,7 @@
   "name": "mesh-api",
   "version": "0.0.12",
   "description": "An API client for Gentics Mesh, written in TypeScript",
-  "main": "lib/build/MeshAPI.js",
+  "main": "lib/generated/MeshAPI.js",
   "scripts": {
     "clean": "rm -rf ./tmp ./lib",
     "test": "node ./lib/test.spec.js",
@@ -12,7 +12,7 @@
     "build": "npm run build-generator && npm run generate-client && npm run build-client"
   },
   "author": "Clemens Prerovsky <c.prerovsky@gentics.com>",
-  "license": "",
+  "license": "MIT",
   "devDependencies": {
     "@types/extend": "^2.0.30",
     "@types/node": "^7.0.5",
@@ -26,7 +26,7 @@
   "files": [
     "lib/"
   ],
-  "typings": "lib/build/MeshAPI.d.ts",
+  "typings": "lib/generated/MeshAPI.d.ts",
   "dependencies": {
     "extend": "^3.0.0",
     "request": "^2.79.0"
